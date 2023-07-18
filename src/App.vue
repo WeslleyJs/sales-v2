@@ -18,6 +18,11 @@
   background-image: url('./assets/stars.png');
 }
 
+/* 
+html {
+  overflow: hidden;
+} */
+
 body {
   background-repeat: no-repeat;
 }
