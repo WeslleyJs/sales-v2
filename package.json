@@ -9,12 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tresjs/cientos": "^2.3.0",
-    "@tresjs/core": "^2.4.2",
+    "@types/three": "^0.152.1",
     "@vueuse/core": "^10.2.1",
     "animate.css": "^4.1.1",
     "axios": "^1.4.0",
-    "three": "^0.154.0",
+    "three": "^0.146.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },

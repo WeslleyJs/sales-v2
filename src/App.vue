@@ -13,7 +13,6 @@
 * {
   margin: 0;
   padding: 0;
-  /* background-image: url('./assets/stars.png'); */
   font-family: 'Fredoke One', sans-serif
 }
 

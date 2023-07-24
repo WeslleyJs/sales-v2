@@ -1,12 +1,15 @@
 <template>
-    <header class="head" style="height: 100vh;">
+    <header class="head shadow-xl" style="height: 100vh;">
 
         <main class="flex justify-center">
-            <div class="head-earth mt-8" style="width: 650px; height: 650px;">
+            <Canvas />
+            <!--  -->
+            <div class="head-earth mt-8 absolute" style="width: 650px; height: 650px;">
                 <span></span>
                 <span></span>
                 <div
                     class="animate__animated  animate__backInDown animate__delay-1s hd md:rounded-xl  relative w-full h-[500px] mt-0 md:mt-20 shadow-lg ">
+
                     <ul class="flex justify-between p-4 text-white">
                         <li class=" text-xl"><a href="/">Inicio</a></li>
                         <li><img src="../assets/ml.svg" style="width: 30px;" alt=""></li>
@@ -24,6 +27,7 @@
                 </div>
             </div>
         </main>
+
         <footer class="opacity-0 md:opacity-100 w-full h-full ">
             <img src="../assets/moon.png" class="w-full" style="margin-top: -150px;" alt="">
         </footer>
@@ -34,6 +38,7 @@
 </template>
 <script setup lang="ts">
 // import Planeta from './Planeta.vue';
+import Canvas from './Canvas.vue'
 </script>
 <style scoped >
 .head {
@@ -42,12 +47,12 @@
     background-size: 800px
 }
 
-.head-earth {
+/* .head-earth {
     background-image: url('../assets/terra.svg');
     background-size: 800px;
     background-position: -40px 30px;
     background-repeat: no-repeat;
-}
+} */
 
 .hd {
     background-color: rgba(0, 0, 0, 0.28);
