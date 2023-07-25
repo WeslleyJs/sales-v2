@@ -1,5 +1,5 @@
 <template>
-    <header class="head shadow-xl" style="height: 100vh;">
+    <header class="head shadow-xl " style="height: 100vh;">
 
         <main class="flex justify-center">
             <Canvas />
@@ -7,23 +7,15 @@
             <div class="head-earth mt-8 absolute" style="width: 650px; height: 650px;">
                 <span></span>
                 <span></span>
-                <div
-                    class="animate__animated  animate__backInDown animate__delay-1s hd md:rounded-xl  relative w-full h-[500px] mt-0 md:mt-20 shadow-lg ">
-
+                <div class=" hd md:rounded-xl  relative w-full h-[500px] mt-0 md:mt-20 shadow-lg ">
                     <ul class="flex justify-between p-4 text-white">
-                        <li class=" text-xl"><a href="/">Inicio</a></li>
-                        <li><img src="../assets/ml.svg" style="width: 30px;" alt=""></li>
-                        <li class=" text-xl">Sobre</li>
+                        <li @click="home(l.id)" class="text-xl hover:cursor-pointer" v-for="l of list" :key="l.id">
+                            {{
+                                l.name
+                            }}</li>
                     </ul>
-                    <div class="items-center text-center mt-36">
-                        <img src="../assets/salesrocket.svg" alt="">
-                        <button>
-                            <a href="">
-                                <img src="../assets/rocket.svg" style="width: 100px;" class="ml-40" alt="">
-                                <p class="text-white ml-40 text-sm animate__animated animate__flash">Começar</p>
-                            </a>
-                        </button>
-                    </div>
+                    <component class="animate__animated animate__backInLeft "
+                        :class="{ animate__backInLeft: f, animate__backOutRight: b }" :is="c[current]" />
                 </div>
             </div>
         </main>
@@ -37,8 +29,29 @@
     <!-- <Planeta /> -->
 </template>
 <script setup lang="ts">
+import { ref } from 'vue';
 // import Planeta from './Planeta.vue';
 import Canvas from './Canvas.vue'
+import Sales from './Sales.vue';
+import Sobre from './Sobre.vue'
+
+// import ml from '../assets/ml.svg'
+
+const list = ref([{ name: 'Inicio', id: 0 }, { name: 'Sobre', id: 1 }])
+
+const f = ref(true)
+const b = ref(false)
+
+const c = [Sales, Sobre]
+const current = ref(0)
+
+function home(id: number) {
+    b.value = true;
+    setTimeout(() => {
+        b.value = false
+        current.value = id
+    }, 300)
+}   
 </script>
 <style scoped >
 .head {
@@ -47,12 +60,6 @@ import Canvas from './Canvas.vue'
     background-size: 800px
 }
 
-/* .head-earth {
-    background-image: url('../assets/terra.svg');
-    background-size: 800px;
-    background-position: -40px 30px;
-    background-repeat: no-repeat;
-} */
 
 .hd {
     background-color: rgba(0, 0, 0, 0.28);
