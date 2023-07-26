@@ -42,7 +42,7 @@ export default {
       // Create Object
       const geometry = new SphereGeometry(11, 50, 50);
       const material = new MeshStandardMaterial({
-        map: new TextureLoader().load("/images/earth2.jpg"),
+        map: new TextureLoader().load("/images/earth.png"),
         transparent: true,
         opacity: 1
       });
@@ -51,7 +51,7 @@ export default {
 
       // Lights
       // light = new PointLight(0xffffff, 1);
-      light = new HemisphereLight(0xffffff, 0, 1);
+      light = new HemisphereLight(0xffffff, 0, 0.9);
       light.position.set(100, 100, 100);
       scene.add(light);
 

@@ -3,19 +3,19 @@
 
         <main class="flex justify-center">
             <Canvas />
-            <!--  -->
             <div class="head-earth mt-8 absolute" style="width: 650px; height: 650px;">
                 <span></span>
                 <span></span>
                 <div class=" hd md:rounded-xl  relative w-full h-[500px] mt-0 md:mt-20 shadow-lg ">
                     <ul class="flex justify-between p-4 text-white">
-                        <li @click="home(l.id)" class="text-xl hover:cursor-pointer" v-for="l of list" :key="l.id">
+                        <li @click="home(l.id)" class="fredoka text-xl hover:cursor-pointer" v-for="l of list" :key="l.id">
                             {{
                                 l.name
                             }}</li>
                     </ul>
-                    <component class="animate__animated animate__backInLeft "
-                        :class="{ animate__backInLeft: f, animate__backOutRight: b }" :is="c[current]" />
+                    <Transition name="slide-fade">
+                        <component :is="c[current]" style="position:absolute" />
+                    </Transition>
                 </div>
             </div>
         </main>
@@ -25,33 +25,25 @@
         </footer>
 
     </header>
-
-    <!-- <Planeta /> -->
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-// import Planeta from './Planeta.vue';
 import Canvas from './Canvas.vue'
 import Sales from './Sales.vue';
 import Sobre from './Sobre.vue'
 
-// import ml from '../assets/ml.svg'
 
 const list = ref([{ name: 'Inicio', id: 0 }, { name: 'Sobre', id: 1 }])
 
-const f = ref(true)
-const b = ref(false)
 
 const c = [Sales, Sobre]
 const current = ref(0)
-
 function home(id: number) {
-    b.value = true;
-    setTimeout(() => {
-        b.value = false
-        current.value = id
-    }, 300)
-}   
+    current.value = id
+}
+
+
+
 </script>
 <style scoped >
 .head {
@@ -60,16 +52,31 @@ function home(id: number) {
     background-size: 800px
 }
 
+.fredoka {
+    font-family: 'Fredoka One';
+}
+
+.slide-fade-enter-active {
+    transition: all 1s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateY(-100px);
+    opacity: 0;
+}
 
 .hd {
     background-color: rgba(0, 0, 0, 0.28);
-
 }
 
 h1 ul li {
     font-family: 'Fredoke One';
 }
-
 
 
 
