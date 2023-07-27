@@ -1,26 +1,27 @@
 <template>
     <header class="head shadow-xl " style="height: 100vh;">
-
-        <main class="flex justify-center">
-            <Canvas />
-            <div class="head-earth mt-8 absolute" style="width: 650px; height: 650px;">
+        <main class="head-earth flex justify-center">
+            <Canvas class="hide" />
+            <div class="sz mt-8 absolute" style="width: 650px; height: 650px;">
                 <span></span>
                 <span></span>
                 <div class=" hd md:rounded-xl  relative w-full h-[500px] mt-0 md:mt-20 shadow-lg ">
-                    <ul class="flex justify-between p-4 text-white">
+                    <ul class="flex justify-center gap-4 md:justify-between p-4 text-white">
                         <li @click="home(l.id)" class="fredoka text-xl hover:cursor-pointer" v-for="l of list" :key="l.id">
                             {{
                                 l.name
                             }}</li>
                     </ul>
+
                     <Transition name="slide-fade">
-                        <component :is="c[current]" style="position:absolute" />
+                        <component :is="c[current]" class="absolute" />
                     </Transition>
+
                 </div>
             </div>
         </main>
 
-        <footer class="opacity-0 md:opacity-100 w-full h-full ">
+        <footer class="opacity-0 md:opacity-100 w-full h-full hide">
             <img src="../assets/moon.png" class="w-full" style="margin-top: -150px;" alt="">
         </footer>
 
@@ -46,10 +47,16 @@ function home(id: number) {
 
 </script>
 <style scoped >
+@media (max-width: 767px) {
+    .hide {
+        display: none;
+    }
+}
+
 .head {
     background-color: #00020F;
     background-image: url('../assets/Stars1.svg');
-    background-size: 800px
+    background-size: 600px;
 }
 
 .fredoka {
@@ -61,7 +68,7 @@ function home(id: number) {
 }
 
 .slide-fade-leave-active {
-    transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+    transition: all .5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,

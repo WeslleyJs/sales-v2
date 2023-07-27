@@ -42,17 +42,17 @@ export default {
       // Create Object
       const geometry = new SphereGeometry(11, 50, 50);
       const material = new MeshStandardMaterial({
-        map: new TextureLoader().load("/images/earth.png"),
+        map: new TextureLoader().load("/images/earth.jpg"),
         transparent: true,
-        opacity: 1
+        opacity: 1,
       });
       mesh = new Mesh(geometry, material);
       scene.add(mesh);
 
       // Lights
-      // light = new PointLight(0xffffff, 1);
-      light = new HemisphereLight(0xffffff, 0, 0.9);
-      light.position.set(100, 100, 100);
+      light = new PointLight(0xffffff, 2.5);
+      // light = new HemisphereLight(0xffffff, 0, 2);
+      light.position.set(0, 0, 0);
       scene.add(light);
 
       // Camera
@@ -69,6 +69,7 @@ export default {
 
       // Controls
       controls = new OrbitControls(camera, canvas);
+      // controls.enableRotate = true;
       controls.enabled = false;
       controls.enableDamping = true;
     };
@@ -93,7 +94,7 @@ export default {
     const animate = () => {
       // mesh.rotation.y += 0.01;
       controls.update();
-      mesh.rotation.y += 0.01;
+      mesh.rotation.y += 0.008;
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
 

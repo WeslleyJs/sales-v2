@@ -9,4 +9,22 @@
 </template>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
+
+button img {
+    animation: animate 1.5s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.2;
+    }
+}
 </style>
