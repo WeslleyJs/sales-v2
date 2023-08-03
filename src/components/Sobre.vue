@@ -9,9 +9,9 @@
         </section>
         <div class="items-center text-center text-white mt-4">
             <h1 class="sobre-title text-xl md:text-2xl">
-                Desenvolvido por:
+                Midias Sociais:
             </h1>
-            <div class="md:flex justify-around mt-8">
+            <div class="flex justify-center gap-4 md:gap-0 md:justify-around mt-8">
                 <a href="https://www.linkedin.com/in/weslley-mateus-7a7a43220/">
                     <img src="../assets/linkedin.svg" style="width: 50px;" alt="linkedin">
                 </a>
@@ -25,7 +25,13 @@
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
 
-@media (max-width: 767px) {}
+@media (max-width: 767px) {
+    p {
+        font-size: 20px;
+        width: 300px;
+        margin-left: 150px;
+    }
+}
 
 p {
     word-spacing: 4px;

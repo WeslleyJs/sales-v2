@@ -1,5 +1,6 @@
 <template>
     <header class="head shadow-xl " style="height: 100vh;">
+
         <main class="head-earth flex justify-center">
             <Canvas class="hide" />
             <div class="sz mt-8 absolute" style="width: 650px; height: 650px;">
@@ -14,9 +15,8 @@
                     </ul>
 
                     <Transition name="slide-fade">
-                        <component :is="c[current]" class="absolute" />
+                        <component :is="c[current]" :link="analycs" class="absolute" @actionRt="handleAction" />
                     </Transition>
-
                 </div>
             </div>
         </main>
@@ -34,16 +34,23 @@ import Sales from './Sales.vue';
 import Sobre from './Sobre.vue'
 
 
-const list = ref([{ name: 'Inicio', id: 0 }, { name: 'Sobre', id: 1 }])
 
+const list = ref([{ name: 'Inicio', id: 0 }, { name: 'Sobre', id: 1 }])
+const rt = ref(false)
 
 const c = [Sales, Sobre]
 const current = ref(0)
+
+const analycs = ref('')
 function home(id: number) {
     current.value = id
 }
 
-
+function handleAction() {
+    analycs.value = 'analycs'
+    rt.value = true
+    console.log('handleAction', analycs.value)
+}
 
 </script>
 <style scoped >
@@ -51,11 +58,16 @@ function home(id: number) {
     .hide {
         display: none;
     }
+
+    .hd {
+        background: none;
+    }
 }
 
 .head {
     background-color: #00020F;
     background-image: url('../assets/Stars1.svg');
+    background-position: center;
     background-size: 600px;
 }
 
