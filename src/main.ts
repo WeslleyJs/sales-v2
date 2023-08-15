@@ -5,6 +5,7 @@ import PrimeVue from 'primevue/config';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
 import InputText from 'primevue/inputtext'
+import Slider from 'primevue/slider'
 import 'animate.css';
 
 import 'primevue/resources/themes/lara-light-teal/theme.css';

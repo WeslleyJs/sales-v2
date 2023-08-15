@@ -2,6 +2,7 @@ module.exports = {
     brand: {
       main: '#000212',
       main02: '#1cbce4',
+      fosco: '404040',
       gray: '#F9F9F9',
       info: '#8296FB',
       graydark: '#C0BCB0',

@@ -1,14 +1,22 @@
 <template>
-    <main class="flex justify-center" style="margin-top: 110px;">
-        <p>Aqui {{ props.mlb }}</p>
-    </main>
+    <div class="card flex  justify-center">
+        <Image class="mt-2 shadow-2xl rounded-sm" src="https://primefaces.org/cdn/primevue/images/galleria/galleria10.jpg"
+            alt="Image" width="250" preview />
+    </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import dayjs from 'dayjs';
+import { useRouter } from 'vue-router'
 import getProduct from "../../utils/mlb";
-const id = 'MLB2138913634'
+import Image from 'primevue/image'
+import { fromJSON } from 'postcss';
+const idMLB = 'MLB2138913634'
+const value = ref(0)
+const route = useRouter()
+
+
 
 const produto = ref()
 const date = ref()
@@ -19,27 +27,21 @@ const attribute02 = ref()
 const props = defineProps({
     mlb: String
 })
+const id = ref();
+// watchEffect(async () => {
+//     id.value = props.mlb
+//     if (id.value !== undefined) {
+//         await getProduct(id.value).then((res: any) => {
+//             const { data } = res
+//             produto.value = data
+//         }).catch((err: any) => {
+//             console.log('MERDA', err)
+//         })
+//     }
+// })
 
-getProduct(id).then((res: any) => {
-    const data = ref(res.data);
-    produto.value = data.value;
-    // console.log('produto', produto.value.title)
-    attributes01.value = data.value.variations
-    date.value = dayjs(data.value.date_created).format('DD/MM/YYYY')
 
 
-
-
-
-    attributes01.value.forEach((element: any) => {
-        const img = element.picture_ids;
-        // console.log('img', img)
-        image.value = `http://http2.mlstatic.com/D_${img[0]}-O.jp`
-        attribute02.value = element.attribute_combinations[2]
-    })
-}).catch((err: any) => {
-    console.log(err)
-})
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');

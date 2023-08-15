@@ -1,36 +1,32 @@
-<template class="">
-    <div class="animate__animated animate__fadeIn">
+<template>
+    <div class="animate__animated animate__fadeIn" style="color:black;">
         <HeadTop @itemMlb="mlb" />
-        <p>Valor recebido do filho: {{ id }}</p>
-    </div>
+        <Transition name="slide-fade">
 
-    <!-- <Transition name="slide-fade">
-        <component :is="rt" :mlb="id" />
-    </Transition> -->
-    <Item :mlb="id" />
+            <component :is="Item" :mlb="id" @err="statusC" />
+        </Transition>
+    </div>
 </template>
 <script setup lang="ts">
 import HeadTop from './HeadTop.vue';
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 import Aln from './Aln.vue';
 import Item from './Item.vue';
-// const rt = ref()
-
-// setTimeout(() => {
-//     rt.value = Aln
-// }, 100)
+const rt = ref()
+const c = [Aln, Item];
+const current = ref(0)
 
 
-interface MLBitem {
-    i: string
+
+const statusC = (date: number) => {
+    console.log('aq', date)
 }
 
 const id = ref()
-const mlb = (date: MLBitem) => {
+const mlb = (date: any) => {
     id.value = date
-    console.log('mlb')
+    console.log('cheogou aqui', id.value)
 }
-
 
 
 </script>
@@ -52,46 +48,21 @@ li {
     font-family: 'Fredoka One';
 }
 
-.teste {
-    width: 20px;
-    height: 20px;
-    margin-top: 20%;
-    background-color: white;
-    border-radius: 100%;
-    animation: animate;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-}
 
-@keyframes animate {
-    0% {
-        transform: scale(1);
-    }
 
-    100% {
-        transform: scale(110);
-    }
-}
-
-.bg-main {
-    background-image: url('../../assets/astronaut.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.slide-fade-enter-active {
-    transition: all 1s;
+/* .slide-fade-enter-active {
+    transition: all 1s ease-out;
+    opacity: .5;
 }
 
 .slide-fade-leave-active {
-    transition: all .5s cubic-bezier(1, 0.5, 0.8, 1);
+    transition: all .5s cubic-bezier(1, 0.5, 0.8, 0);
+    opacity: 0;
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-    transform: translateY(100px);
+    transform: translateY(20px);
     opacity: 0;
-}
+} */
 </style>
-<!-- ../../utils/mlb.ts -->

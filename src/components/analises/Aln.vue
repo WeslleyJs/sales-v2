@@ -1,38 +1,67 @@
 <template>
-    <div style="margin-top: 20px;" class=" flex flex-row content-center items-center justify-center gap-8 ">
-        <Card class="rounded-xl shadow-2xl" style="width: 28em">
-            <template #header>
-                <img style="height: 250px;" class="w-full rounded-t-xl" alt="user header" src="../../assets/chart.png" />
-            </template>
-            <template #title> Extensões Chrome </template>
-            <template #content>
-                <p>
-                    Temos disponível uma extensão gratuita no navegador para o navegador Chrome, facilitando sua análise de
-                    mercado, sem sair do Mercado Livre.
-                </p>
-            </template>
-            <template #footer>
-                <Button icon="pi pi-check" label="Download" />
-            </template>
-        </Card>
-        <Card class="rounded-xl shadow-2xl" style="width: 28em">
-            <template #header>
-                <img style="height: 250px;" class="w-full rounded-t-xl" alt="user header"
-                    src="../../assets/mercado-livre.png" />
-            </template>
-            <template #title> Importante </template>
-            <template #content>
-                <p>
-                    Esta plataforma utiliza das informações presentes na API oficial do Mercado Livre, portanto alguns dados
-                    são apenas uma estimativa aproximada para sua análise
-                </p>
-            </template>
-            <template #footer>
-                <Button icon="pi pi-check" label="Download" />
-            </template>
-        </Card>
+    <div style="margin-left: 160px; margin-top: 200px;">
+        <img class="sales" src="../../assets/salesrocket.svg" style="width:500px;" alt="">
+    </div>
+    <div style="margin-left: 250px;" class="mt-8">
+        <p style="color:rgb(108, 108, 108)">Baixe nossa extensão para Google Chrome</p>
+        <button class="text-white mt-4 bg-black shadow-xl ml-24 border rounded-2xl px-6 py-2 text-black">Download</button>
+    </div>
+    <div style="z-index: -1"
+        class="absolute mt-2 transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
+        <div class="flex items-center space-x-6 lg:space-x-8 bg-white">
+            <div class="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
+                <div style="width: 210px; height: 270px;"
+                    class="ca border-2 bg-gradient flex justify-center items-center content-center shadow-xl rounded-t-lg overflow-hidden">
+                    <img style="width: 200px;height: 200px;" src="../../assets/img/iphone.png" alt="">
+                </div>
+                <div style="width: 210px; height: 270px;"
+                    class="ca border-2 bg-gradient flex justify-center items-center content-center shadow-xl rounded-t-lg overflow-hidden">
+                    <img style="width: 150px;height: 200px;" src="../../assets/img/apple.png" alt="">
+                </div>
+            </div>
+            <div class="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
+                <div style="width: 210px; height: 270px;"
+                    class="ca border-2 bg-gradient flex justify-center items-center content-center shadow-xl rounded-t-lg overflow-hidden">
+                    <img style="width: 200px;height: 200px;" src="../../assets/img/capacete.png" alt="">
+                </div>
+                <div style="width: 210px; height: 270px;"
+                    class="border-2 bg-gradient flex justify-center items-center content-center shadow-xl rounded-t-lg overflow-hidden">
+                    <img style="width: 150px;height: 140px;" src="../../assets/img/ml.png" alt="">
+                </div>
+                <div style="width: 210px; height: 270px;"
+                    class="ca border-2 bg-gradient flex justify-center items-center content-center shadow-xl rounded-t-lg overflow-hidden">
+                    <img style="width: 150px;height: 160px;" src="../../assets/img/eletro.png" alt="">
+                </div>
+            </div>
+            <div class="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
+                <div style="width: 210px; height: 270px;"
+                    class="ca border-2 bg-gradient flex justify-center items-center content-center shadow-xl rounded-t-lg overflow-hidden">
+                    <img style="width: 200px;height: 200px;" src="../../assets/img/camisa.png" alt="">
+                </div>
+                <div style="width: 210px; height: 270px;"
+                    class="ca border-2  bg-gradient bg-fosc flex justify-center items-center content-center shadow-xl rounded-t-lg overflow-hidden">
+                    <img style="width: 200px;height: 180px;" src="../../assets/img/package.png" alt="">
+                </div>
+            </div>
+
+        </div>
     </div>
 </template>
-<script setup lang="ts">
-</script>
-<style scoped></style>
+<style scooped>
+.bg-gradient {
+    background-color: rgb(250, 250, 250);
+}
+
+.sales {
+    filter: drop-shadow(0 0 2px rgb(0, 0, 0));
+}
+
+.ca {
+    transition: .8s;
+}
+
+.ca:hover {
+    transform: rotate(8deg) scale(1.1);
+    transition: .5s;
+}
+</style>
