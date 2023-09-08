@@ -16,7 +16,6 @@
   font-family: 'Fredoke One', sans-serif
 }
 
-
 html {
   overflow: hidden;
   scroll-behavior: smooth;

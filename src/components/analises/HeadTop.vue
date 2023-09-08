@@ -1,10 +1,10 @@
 <template>
-    <header style="height: 10vh;" class="border-b-2 bg-white z-10">
+    <header style="height: 10vh;" class="shadow-sm bg-white z-10">
         <div class="flex justify-around items-center py-2">
             <div class="flex justify-around items-center content-center gap-6">
                 <a href="/">
                     <p class="text-2xl">Inicio</p>
-                    <p>{{ iMLB }}</p>
+                    <!-- <p>{{ iMLB }}</p> -->
                 </a>
             </div>
             <span class="p-input-icon-left" @keydown.enter="confirm">
@@ -16,7 +16,7 @@
 </template>
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
-const iMLB = 'MLB2138913634'
+const iMLB = 'MLB1054520743'
 
 const emit = defineEmits(["itemMlb"])
 const data = ref('');
@@ -25,9 +25,6 @@ const data = ref('');
 function confirm() {
     emit("itemMlb", data.value)
     console.log('com', data.value)
-    data.value = ''
-    console.log('sem', data.value)
-
 }
 </script>
 <style scoped>

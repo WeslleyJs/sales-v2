@@ -1,10 +1,12 @@
 <template>
     <div class="animate__animated animate__fadeIn" style="color:black;">
         <HeadTop @itemMlb="mlb" />
-        <Transition name="slide-fade">
+        <Item v-if="id" :mlb="id" />
+        <Aln v-else />
+        <!-- <Transition name="slide-fade">
 
             <component :is="Item" :mlb="id" @err="statusC" />
-        </Transition>
+        </Transition> -->
     </div>
 </template>
 <script setup lang="ts">
@@ -12,15 +14,6 @@ import HeadTop from './HeadTop.vue';
 import { ref, watchEffect } from 'vue';
 import Aln from './Aln.vue';
 import Item from './Item.vue';
-const rt = ref()
-const c = [Aln, Item];
-const current = ref(0)
-
-
-
-const statusC = (date: number) => {
-    console.log('aq', date)
-}
 
 const id = ref()
 const mlb = (date: any) => {
