@@ -18,7 +18,6 @@ import Item from './Item.vue';
 const id = ref()
 const mlb = (date: any) => {
     id.value = date
-    console.log('cheogou aqui', id.value)
 }
 
 

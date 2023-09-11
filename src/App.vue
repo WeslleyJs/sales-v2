@@ -20,4 +20,12 @@ html {
   overflow: hidden;
   scroll-behavior: smooth;
 }
+
+@media (max-width: 767px) {
+
+  html {
+    overflow: auto;
+    scroll-behavior: smooth;
+  }
+}
 </style>

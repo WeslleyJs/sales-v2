@@ -15,8 +15,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/teste',
     name: 'teste',
     component: () => import(/* webpackChunkName: "about" */ '../components/analises/Animation.vue')
-  }
-
+  },
+  {
+    path:'/:catchAll(.*)',
+    name: 'error',
+    component: () => import(/* webpackChunkName: "error" */ '../components/Error.vue')
+},
+{
+  path:'/error',
+  name: 'error',
+  component: () => import(/* webpackChunkName: "error" */ '../components/Error.vue')
+},
 
 ]
 

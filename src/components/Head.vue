@@ -6,7 +6,7 @@
             <div class="sz mt-8 absolute" style="width: 650px; height: 650px;">
                 <span></span>
                 <span></span>
-                <div class=" hd md:rounded-xl  relative w-full h-[500px] mt-0 md:mt-20 shadow-lg ">
+                <div class="hd md:rounded-xl  relative w-full h-[500px] mt-0 md:mt-20 shadow-lg ">
                     <ul class="flex justify-center gap-4 md:justify-between p-4 text-white">
                         <li @click="home(l.id)" class="fredoka text-xl hover:cursor-pointer" v-for="l of list" :key="l.id">
                             {{
@@ -96,11 +96,6 @@ function handleAction() {
 h1 ul li {
     font-family: 'Fredoke One';
 }
-
-
-
-
-
 
 span {
     position: fixed;

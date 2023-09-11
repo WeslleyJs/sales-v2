@@ -9,8 +9,8 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-center" style="color: black;">
-        <TabView class="rounded-lg py-6 shadow-2xl" headerClass="bg-black" style="width: 650px; height: 300px;">
+    <div class="flex justify-center " style="color: black;">
+        <TabView class="border rounded-lg py-6 shadow-2xl" headerClass="bg-black" style="width: 650px; height: 350px;">
             <TabPanel header="Geral" headerClass="w-full">
                 <ul class="mt-2">
                     <li>Data de Cadastro: {{ date }}</li>
@@ -41,8 +41,9 @@
                         <Chart type="line" :data="chartData" :options="chartOptions" class="h-36" />
                     </div>
                 </div>
-                <div v-else class="card flex justify-content-center">
-                    <ProgressSpinner />
+                <div v-else class="card flex justify-content-center" style="overflow: hidden;">
+                    <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--surface-ground)"
+                        animationDuration=".5s" aria-label="Custom ProgressSpinner" />
                 </div>
             </TabPanel>
         </TabView>
@@ -54,6 +55,7 @@ import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
 import Chart from 'primevue/chart';
 import ProgressSpinner from 'primevue/progressspinner';
+import { useRouter } from 'vue-router'
 
 import { ref, watchEffect, onMounted } from 'vue';
 import dayjs from 'dayjs';
@@ -61,9 +63,10 @@ import getProduct from "../../utils/mlb";
 import getShipping from '../../utils/shipping';
 import { getVisits } from '../../utils/visits.ts';
 import Image from 'primevue/image'
-
+import { AxiosError } from 'axios';
 const idMLB = 'MLB2138913634'
 
+const route = useRouter();
 const produto = ref<string | any>('');
 const shipping = ref<string | any>('');
 const date = ref();
@@ -77,29 +80,31 @@ const props = defineProps({
     mlb: String
 })
 const id = ref();
-watchEffect(async () => {
+watchEffect(() => {
     id.value = props.mlb
     if (!id.value.startsWith('MLB')) id.value = 'MLB' + id.value;
     if (id.value !== undefined) {
-        await getProduct(id.value).then((res: any) => {
+        getProduct(id.value).then((res: any) => {
             const { data } = res
             produto.value = data;
-            date.value = dayjs(data.date_created).format("DD/MM/YYYY")
+            date.value = dayjs(data.date_created).format("DD/MM/YYYY");
             img.value = `http://http2.mlstatic.com/D_${data.thumbnail_id}-O.jp`
-        }).catch((err: any) => {
-            console.log('error', err)
+        }).catch((err: AxiosError) => {
+            if (err.response?.status === 404) {
+                route.push({ path: 'error' })
+                setTimeout(() => document.location.reload(), 13);
+            }
         });
-        await getShipping(id.value).then((res: any) => {
+        getShipping(id.value).then((res: any) => {
             const { data } = res
             Object.keys(data).map(function (key) {
                 const result = data[key].coverage.all_country;
                 shipping.value = result;
             })
         }).catch(err => console.log('erro variações ', err));
-        await getVisits(id.value).then((res: any) => {
+        getVisits(id.value).then((res: any) => {
             // visitasChart.value = res.data.results
             visitas.value = res.data;
-
 
             label.value = res.data.results.map((item: any) => dayjs(item.date).format("DD/MM"));
             visit.value = res.data.results.map((item: any) => item.total);

@@ -15,7 +15,7 @@
     </header>
 </template>
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 const iMLB = 'MLB1054520743'
 
 const emit = defineEmits(["itemMlb"])
@@ -24,7 +24,6 @@ const data = ref('');
 
 function confirm() {
     emit("itemMlb", data.value)
-    console.log('com', data.value)
 }
 </script>
 <style scoped>

@@ -2,11 +2,14 @@
     <Animation v-if="show" style="z-index: 1;" />
     <div class="block items-center text-center text-8xl mt-36">
         <img class="sales" src="../assets/salesrocket.svg" alt="">
-        <div class="flex justify-center mt-8 ">
+        <div class="flex justify-center mt-8 mobile-version">
             <input type="range" @mouseup="click" v-model.number="value" class="w-2/12 rocket input-rocket" />
         </div>
-        <div class="flex justify-center mt-2">
+        <div class="flex justify-center mt-2 mobile-version">
             <p class="text-lg">Arraste e comece</p>
+        </div>
+        <div class="md:hidden flex justify-center mt-2">
+            <button @click="mobile" style="color: white; font-size: 28px;">Iniciar</button>
         </div>
     </div>
 </template>
@@ -20,7 +23,10 @@ const show = ref(false);
 const value = ref(0);
 const link = ref('/');
 
-
+function mobile() {
+    link.value = '/analises'
+    route.push({ path: link.value })
+}
 function click() {
     if (value.value < 100) value.value = 0
     if (value.value === 100) {
@@ -43,6 +49,10 @@ function click() {
     .sales {
         width: 350px;
         margin-left: 150px
+    }
+
+    .mobile-version {
+        opacity: 0;
     }
 }
 

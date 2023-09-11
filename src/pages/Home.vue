@@ -2,7 +2,6 @@
     <Head />
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
 import Head from '../components/Head.vue';
 
 </script>
