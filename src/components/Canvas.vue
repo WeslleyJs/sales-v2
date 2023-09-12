@@ -38,7 +38,7 @@ export default {
     const setCanvas = () => {
       // Create Scene
       scene = new Scene();
-      scene.background = new TextureLoader().load();
+      scene.background = new TextureLoader().load('');
       // Create Object
       const geometry = new SphereGeometry(11, 50, 50);
       const material = new MeshStandardMaterial({
