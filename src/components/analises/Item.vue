@@ -91,8 +91,8 @@ watchEffect(() => {
             img.value = `http://http2.mlstatic.com/D_${data.thumbnail_id}-O.jp`
         }).catch((err: AxiosError) => {
             if (err.response?.status === 404) {
-                route.push({ path: 'error' })
-                setTimeout(() => document.location.reload(), 13);
+                // route.push({ path: 'error' })
+                setTimeout(() => document.location.reload(), 15);
             }
         });
         getShipping(id.value).then((res: any) => {

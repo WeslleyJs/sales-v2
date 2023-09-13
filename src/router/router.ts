@@ -17,15 +17,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../components/analises/Animation.vue')
   },
   {
-    path:'/:catchAll(.*)',
+    path:'/:pathMatch(.*)*',
     name: 'error',
-    component: () => import(/* webpackChunkName: "error" */ '../components/Error.vue')
+    component: () => import('../components/Error.vue')
 },
-{
-  path:'/error',
-  name: 'error',
-  component: () => import(/* webpackChunkName: "error" */ '../components/Error.vue')
-},
+// {
+//   path:'/error',
+//   name: 'error',
+//   component: () => import(/* webpackChunkName: "error" */ '../components/Error.vue')
+// },
 
 ]
 
