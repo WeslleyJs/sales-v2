@@ -18,6 +18,7 @@
                     <li>Vendidos: {{ produto.sold_quantity }} </li>
                     <li>Peso cadastrado: {{ shipping?.billable_weight }}g</li>
                     <li>Valor Frete Pago pelo Seller: R$ {{ shipping?.list_cost }}</li>
+                    <li>Modalidade: {{ produto.shipping?.logistic_type === 'fulfillment' ? 'FULL' : 'Cross Docking' }}</li>
                 </ul>
             </TabPanel>
             <TabPanel :disabled="produto.variations.length < 1" header="Variações" headerClass="w-full">
