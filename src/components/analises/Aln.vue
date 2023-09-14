@@ -5,7 +5,7 @@
     </div>
     <div class="mt-8 md:ml-[250px]">
         <p style="color:rgb(108, 108, 108)">Baixe nossa extensão para Google Chrome</p>
-        <button class="text-white mt-4 bg-black shadow-xl ml-24 border rounded-2xl px-6 py-2 text-black">Download</button>
+        <button class="text-white mt-4 bg-black shadow-xl ml-24 border rounded-2xl px-6 py-2 text-black"><a href="https://chrome.google.com/webstore/detail/sales-rocket/apkecalanibncoanbccfpnolmoaoeejf/related?hl=pt-BR&authuser=0">Download</a></button>
     </div>
     <div style="z-index: -1"
         class="absolute hidden md:block mt-2 transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
