@@ -17,7 +17,7 @@
 }
 
 html {
-  overflow: hidden;
+  /* overflow: hidden; */
   scroll-behavior: smooth;
 }
 

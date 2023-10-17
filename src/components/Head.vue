@@ -1,148 +1,65 @@
 <template>
-    <header class="head shadow-xl " style="height: 100vh;">
-
-        <main class="head-earth flex justify-center">
-            <Canvas class="hide" />
-            <div class="sz mt-8 absolute" style="width: 650px; height: 650px;">
-                <span></span>
-                <span></span>
-                <div class="hd md:rounded-xl  relative w-full h-[500px] mt-0 md:mt-20 shadow-lg ">
-                    <ul class="flex justify-center gap-4 md:justify-between p-4 text-white">
-                        <li @click="home(l.id)" class="fredoka text-xl hover:cursor-pointer" v-for="l of list" :key="l.id">
-                            {{
-                                l.name
-                            }}</li>
-                    </ul>
-
-                    <Transition name="slide-fade">
-                        <component :is="c[current]" :link="analycs" class="absolute" @actionRt="handleAction" />
-                    </Transition>
-                </div>
-            </div>
-        </main>
-
-        <footer class="opacity-0 md:opacity-100 w-full h-full hide">
-            <img src="../assets/moon.png" class="w-full" style="margin-top: -150px;" alt="">
-        </footer>
-
-    </header>
+    <HeaderTop class="flex justify-between bg-head p-2">
+        <a href="#sobre">
+            <p class="text-2xl fredoka">Sobre</p>
+        </a>
+        <Btn class="ml-[1100px]">
+            <router-link to="/analises" class="fredoka"> Começar</router-link>
+        </Btn>
+    </HeaderTop>
+    <main class="flex justify-center items-center  border-b-2 bg-bl" style="height: 90vh;">
+        <!-- <img src="../assets/blur.png" class="blur teste absolute" style="width: 700px;" alt=""> -->
+        <div class="text-center mb-8 divPer animate__animated animate__zoomInDown">
+            <img class="mx-auto astronauta" src="../assets/astro_logo.svg" style="width: 400px;" alt="">
+            <img class="sales mx-auto" src="../assets/salesrocket.svg" alt="">
+            <Btn class="mt-8">
+                <router-link to="/analises" class="fredoka">Começar</router-link>
+            </Btn>
+        </div>
+    </main>
+    <section class="mt-4 text-center mb-8 hidden md:block">
+        <MacBook />
+    </section>
+    <section class="mt-[180px] mb-[200px] md:mb-16" id="sobre">
+        <GridCard />
+    </section>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-import Canvas from './Canvas.vue'
-import Sales from './Sales.vue';
-import Sobre from './Sobre.vue'
-
-
-
-const list = ref([{ name: 'Inicio', id: 0 }, { name: 'Sobre', id: 1 }])
-const rt = ref(false)
-
-const c = [Sales, Sobre]
-const current = ref(0)
-
-const analycs = ref('')
-function home(id: number) {
-    current.value = id
-}
-
-function handleAction() {
-    analycs.value = 'analycs'
-    rt.value = true
-    console.log('handleAction', analycs.value)
-}
-
+import HeaderTop from './analises/HeadTop.vue'
+import MacBook from './analises/MacBook.vue'
+import GridCard from './analises/GridCard.vue'
+import Btn from './Btn.vue';
 </script>
-<style scoped >
-@media (max-width: 767px) {
-    .hide {
-        display: none;
-    }
+<style scoped>
 
-    .hd {
-        background: none;
+
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
+
+
+
+.bg-bl{
+    background-image: url(../assets/thumb.png);
+    background-repeat: no-repeat;
+    background-size: 1200px;
+}
+@media (max-width: 768px) {
+    .bg-bl{
+        background-image: none;
+        
     }
 }
-
-.head {
-    background-color: #00020F;
-    background-image: url('../assets/Stars1.svg');
-    background-position: center;
-    background-size: 600px;
-}
-
 .fredoka {
     font-family: 'Fredoka One';
 }
-
-.slide-fade-enter-active {
-    transition: all 1s ease-out;
+.bg-head{
+    background-color: none;
+}
+.sales{
+    background: none;
+    filter: drop-shadow(0 0 .2rem black);
+}
+.astro-logo{
+    background: none;
 }
 
-.slide-fade-leave-active {
-    transition: all .5s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-    transform: translateY(-100px);
-    opacity: 0;
-}
-
-.hd {
-    background-color: rgba(0, 0, 0, 0.28);
-}
-
-h1 ul li {
-    font-family: 'Fredoke One';
-}
-
-span {
-    position: fixed;
-
-    top: 5%;
-    left: 5%;
-    width: 4px;
-    height: 4px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1);
-    animation: animate 10s linear infinite;
-}
-
-span::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 4%;
-    transform: translateY(5%);
-    width: 200px;
-    height: 1px;
-    background: linear-gradient(90deg, #fff, transparent);
-}
-
-@keyframes animate {
-    0% {
-        transform: rotate(315deg) translateX(0);
-        opacity: 1;
-    }
-
-    70% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: rotate(315deg) translateX(-550px);
-        opacity: 0;
-    }
-}
-
-span:nth-child(1) {
-    top: 0;
-    right: 0;
-    left: initial;
-    animation-delay: 2s;
-    animation-duration: 1s;
-    animation: animate 8s linear infinite;
-}
 </style>

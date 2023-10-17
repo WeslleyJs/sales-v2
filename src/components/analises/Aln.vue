@@ -1,11 +1,11 @@
 <template>
-    <div class="mt-[200px] md:mt-[200px] md:ml-[160px]">
+    <div class="ml-2 mt-[80px] md:mt-[200px] md:ml-[160px]">
         <img class="sales hidden md:block" src="../../assets/salesrocket.svg" style="width:500px;" alt="">
         <p class="md:hidden text-black text-[100px] sales-font">Sales<br>Rocket</p>
     </div>
-    <div class="mt-8 md:ml-[250px]">
+    <div class="ml-12 mt-2 md:mt-8 md:ml-[250px]">
         <p style="color:rgb(108, 108, 108)">Baixe nossa extensão para Google Chrome</p>
-        <button class="text-white mt-4 bg-black shadow-xl ml-24 border rounded-2xl px-6 py-2 text-black"><a href="https://chrome.google.com/webstore/detail/sales-rocket/apkecalanibncoanbccfpnolmoaoeejf/related?hl=pt-BR&authuser=0">Download</a></button>
+        <Btn class="ml-16 mt-8 font-bold"><a href="https://chrome.google.com/webstore/detail/sales-rocket/apkecalanibncoanbccfpnolmoaoeejf/related?hl=pt-BR&authuser=0">Download</a></Btn>
     </div>
     <div style="z-index: -1"
         class="absolute hidden md:block mt-2 transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
@@ -48,6 +48,9 @@
         </div>
     </div>
 </template>
+<script setup lang="ts">
+import Btn from '../Btn.vue';
+</script>
 <style scooped>
 .bg-gradient {
     background-color: rgb(250, 250, 250);

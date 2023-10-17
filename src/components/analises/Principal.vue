@@ -1,6 +1,6 @@
 <template>
     <div class="animate__animated animate__fadeIn" style="color:black;">
-        <HeadTop @itemMlb="mlb" />
+        <HeadTop @itemMlb="mlb"/>
         <Item v-if="id" :mlb="id" />
         <Aln v-else />
         <!-- <Transition name="slide-fade">
@@ -14,6 +14,9 @@ import HeadTop from './HeadTop.vue';
 import { ref, watchEffect } from 'vue';
 import Aln from './Aln.vue';
 import Item from './Item.vue';
+
+
+
 
 const id = ref()
 const mlb = (date: any) => {

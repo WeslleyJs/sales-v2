@@ -1,6 +1,9 @@
 <template>
+    <div v-if="produto">
+
+
     <div class="text-center">
-        <div v-if="produto">
+        <div>
             <div>
                 <Image class="mt-1 shadow-xl" :src="img" alt="Image" style="width: 150px;" preview />
             </div>
@@ -43,12 +46,28 @@
                     </div>
                 </div>
                 <div v-else class="card flex justify-content-center" style="overflow: hidden;">
-                    <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--surface-ground)"
-                        animationDuration=".5s" aria-label="Custom ProgressSpinner" />
+                    <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
                 </div>
+            </TabPanel>
+            <TabPanel header="Categoria" headerClass="w-full">
+                <ul class="mt-2">
+                    <li class="mt-2">Categoria: {{ categoryDatas.name }}</li>
+                    <li class="mt-2">Anúncios na categoria: {{ categoryDatas.total_items_in_this_category }}</li>
+                    <li class="mt-2">ID da Categoria: {{ categoryDatas.id }}</li>
+                    <li class="mt-2">Categoria criada em: {{ dayjs(categoryDatas.date_created).format("DD/MM/YYYY") }}</li>
+                </ul>
+            </TabPanel>
+            <TabPanel header="Seller" headerClass="w-full">
+                <ul class="mt-2">
+                    <li class="mt-2">Seller: {{ seller.nickname }} - ID: {{ seller.id }}</li>
+                    <li class="mt-2">Cidade: {{ seller.address.city }} - {{ seller.address.state }} </li>
+                    <li class="mt-2">Reputação: {{ seller.seller_reputation.level_id.toUpperCase().slice(2) }} - {{ seller.seller_reputation.power_seller_status.toUpperCase() }}</li>
+                </ul>
             </TabPanel>
         </TabView>
     </div>
+</div>
+    <div v-else="!produto" class="flex justify-center"><i class="pi pi pi-spin pi-spinner" style="font-size: 3rem;"></i></div>
 </template>
 
 <script setup lang="ts">
@@ -62,12 +81,13 @@ import { ref, watchEffect, onMounted } from 'vue';
 import dayjs from 'dayjs';
 import getProduct from "../../utils/mlb";
 import getShipping from '../../utils/shipping';
+import getCategory from '../../utils/category';
+import getSeller from '../../utils/seller';
 import { getVisits } from '../../utils/visits.ts';
 import Image from 'primevue/image'
 import { AxiosError } from 'axios';
-const idMLB = 'MLB2138913634'
+// const idMLB = 'MLB2138913634'
 
-const route = useRouter();
 const produto = ref<string | any>('');
 const shipping = ref<string | any>('');
 const date = ref();
@@ -75,45 +95,63 @@ const img = ref();
 const visitas = ref();
 const label = ref();
 const visit = ref();
-
+const category = ref();
+const categoryDatas = ref();
+const seller = ref();
 
 const props = defineProps({
     mlb: String
 })
 const id = ref();
-watchEffect(() => {
-    id.value = props.mlb
+watchEffect(async () => {
+     id.value = props.mlb;
     if (!id.value.startsWith('MLB')) id.value = 'MLB' + id.value;
-    if (id.value !== undefined) {
-        getProduct(id.value).then((res: any) => {
-            const { data } = res
-            produto.value = data;
-            date.value = dayjs(data.date_created).format("DD/MM/YYYY");
-            img.value = `http://http2.mlstatic.com/D_${data.thumbnail_id}-O.jp`
-        }).catch((err: AxiosError) => {
-            if (err.response?.status === 404) {
-                // route.push({ path: 'error' })
-                setTimeout(() => document.location.reload(), 15);
-            }
-        });
-        getShipping(id.value).then((res: any) => {
-            const { data } = res
-            Object.keys(data).map(function (key) {
-                const result = data[key].coverage.all_country;
+    
+    try {
+        const productData = await getProduct(id.value);
+        const shippingData = await getShipping(id.value);
+        const visitsData = await getVisits(id.value);
+        const categoryData = await getCategory(productData.data.category_id);
+        const sellerInfo = await getSeller(productData.data.seller_id);
+        console.log('seller info', categoryData.data);
+        const { data } = productData;
+        
+        category.value = data.category_id;
+        produto.value = data;
+        date.value = dayjs(data.date_created).format("DD/MM/YYYY");
+        img.value = `http://http2.mlstatic.com/D_${data.thumbnail_id}-O.jp`;
+        seller.value = sellerInfo.data;
+
+        
+        visitas.value = visitsData.data;
+        label.value = visitsData.data.results.map((item: any) => dayjs(item.date).format("DD/MM"));
+        visit.value = visitsData.data.results.map((item:any) => item.total);
+        
+        categoryDatas.value = categoryData.data;
+        
+        let shp = shippingData.data
+        Object.keys(shp).map(function (key) {
+                const result = shp[key].coverage.all_country;
                 shipping.value = result;
             })
-        }).catch(err => console.log('erro variações ', err));
-        getVisits(id.value).then((res: any) => {
-            // visitasChart.value = res.data.results
-            visitas.value = res.data;
-
-            label.value = res.data.results.map((item: any) => dayjs(item.date).format("DD/MM"));
-            visit.value = res.data.results.map((item: any) => item.total);
-        }).catch((err: any) => {
-            console.log('er', err.message)
-        });
+    } catch (error :any) {
+        if (error.response?.status === 404) {
+            setTimeout(() => document.location.reload(), 15);
+        }
+        if(error.response?.status === 429){
+            const retryAfter = error.response.headers['Retry-After'];
+            // Aguarde o tempo especificado antes de tentar novamente
+            await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+            // Tente novamente a solicitação
+            return getVisits(id.value);
+        } 
+        else {
+            // Trate outros erros de forma adequada
+            console.error('Erro desconhecido:', error);
+        }
     }
-})
+});
+
 
 
 onMounted(() => {
