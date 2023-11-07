@@ -1,11 +1,8 @@
 <template>
-    <HeaderTop class="flex justify-between bg-head p-2">
+    <HeaderTop class="flex bg-head p-2">
         <a href="#sobre">
             <p class="text-2xl fredoka">Sobre</p>
         </a>
-        <Btn class="ml-[1100px]">
-            <router-link to="/analises" class="fredoka"> Começar</router-link>
-        </Btn>
     </HeaderTop>
     <main class="flex justify-center items-center  border-b-2 bg-bl" style="height: 90vh;">
         <!-- <img src="../assets/blur.png" class="blur teste absolute" style="width: 700px;" alt=""> -->
