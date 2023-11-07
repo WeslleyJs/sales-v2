@@ -61,7 +61,7 @@
                 <ul class="mt-2">
                     <li class="mt-2">Seller: {{ seller.nickname }} - ID: {{ seller.id }}</li>
                     <li class="mt-2">Cidade: {{ seller.address.city }} - {{ seller.address.state }} </li>
-                    <li class="mt-2">Reputação: {{ seller.seller_reputation.level_id.toUpperCase().slice(2) }} - {{ seller.seller_reputation.power_seller_status.toUpperCase() }}</li>
+                    <li class="mt-2">Reputação: {{ seller.seller_reputation.level_id }} - {{ seller.seller_reputation.power_seller_status}}</li>
                 </ul>
             </TabPanel>
         </TabView>
@@ -105,7 +105,7 @@ const props = defineProps({
 const id = ref();
 watchEffect(async () => {
      id.value = props.mlb;
-    if (!id.value.startsWith('MLB')) id.value = 'MLB' + id.value;
+    // if (!id.value.startsWith('MLA')) id.value = 'MLA' + id.value;
     
     try {
         const productData = await getProduct(id.value);

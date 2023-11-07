@@ -1,17 +1,18 @@
 <template>
-    <header style="height: 10vh;" class="z-10 bg-white">
-        <div class="flex justify-around items-center py-2">
-            <div class="flex justify-around items-center content-center gap-6">
+    <header style="height: 10vh;" class="z-10 top-0 left-0 bg-white w-full">
+        <div class="flex justify-around text-center items-center p-2 w-full">
+            <div class="flex gap-12">
                 <a href="/">
                     <p class="text-2xl">Inicio</p>
-                    <!-- <p>{{ iMLB }}</p> -->
                 </a>
                 <slot></slot>
             </div>
-            <span v-if="input" class="p-input-icon-left" @keydown.enter="confirm">
-                <i class="pi pi-search" @click="confirm" />
-                <InputText class="rounded" v-model="data" placeholder="Search" />
-            </span>
+            <div>
+                <span v-if="input" class="p-input-icon-left" @keydown.enter="confirm">
+                    <i class="pi pi-search" @click="confirm" />
+                    <InputText class="rounded" v-model="data" placeholder="Search" />
+                </span>
+            </div>
         </div>
     </header>
 </template>
@@ -29,7 +30,7 @@ function confirm() {
 }
 const input = ref(false);
 watchEffect(() => {
-    if(window.location.href.endsWith('/analises')){
+    if (window.location.href.endsWith('/analises')) {
         input.value = true
     }
 })
@@ -39,6 +40,4 @@ a p {
     font-family: 'Fredoka One';
     color: black;
 }
-
-
 </style>
